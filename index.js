@@ -63,7 +63,6 @@ async function purchase() {
         const price = master.optimalBuyPrice;
         const quantity = calculateQuantityBasedOnBudget(price);
         unconfirmedPurchase = await binance.order({ symbol: TRADING_PAIR, side: 'BUY', quantity, price });
-        //console.log('[PURCHASING]:::: ', unconfirmedPurchase.price);
 
         term.moveTo(1, position(), `^w${unconfirmedPurchase.price}^`);
         term.moveTo(45,position(), `^bPURCHASING     ^`);        
@@ -84,12 +83,9 @@ async function confirmPurchase() {
             confirmingPurchase = false;
             check.price = Number(check.price).toFixed(8);
             confirmedPurchase = check;
-            //console.log('[PURCHASED]:::: ', check.price);
 
             term.moveTo(1,position(), `^w${check.price}^`);
             term.moveTo(45,position(), `^bPURCHASED      ^`);
-
-            
 
         };
         confirmPurchase();
